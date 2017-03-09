@@ -1,0 +1,34 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: PokemonApp
+  x-ibm-name: pokemonapp
+host: $(catalog.host)
+basePath: /api
+paths:
+  /pokemon:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+securityDefinitions:
+    clientID:
+        description: ''
+        in: query
+        name: client_id
+        type: apiKey
+security:
+  - clientID: []
+x-ibm-configuration:
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(TestProperty)
+  properties:
+    TestProperty:
+      value: 'https://pokemons.mybluemix.net/api/pokemons'
+      description: ''
+      encoded: false
+  gateway: micro-gateway
+    
+
